@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"     content="width=device-width, initial-scale=1">
+    <meta name="description"  content="D&D 3.5 Spell Research">
+    <meta name="author"       content="David MAHEO">
+    <link rel="icon" href="./Book.png">
+
+    <title>Speel with Bootstrap</title>
+    <link href="./bootstrap.min.css" rel="stylesheet">
+    <link href="./bootstrap-theme.min.css" rel="stylesheet">
+  </head>
+
+  <body role="document">
+
+    <div class="container theme-showcase" role="main">
+      <div  class="jumbotron" style="margin-top: 10px;padding-right: 20px;padding-left: 20px;padding-top: 20px;padding-bottom: 20px;">
+        <h1>Les Sorts :</h1>
+        <table>
+          <tr> 
+            <td><label for="test1">Search Name :</label></td>
+            <td><input type="text" id="spell_name_val" style="border:1px" value="Recherche"></td>
+            <td><input type="checkbox" id="spell_name_box" value="Recherche Par Ecole"></td>
+            <td><label for="test1">Prendre en compte?</label></td>
+          </tr>
+          <tr>
+            <td><label for="test1">Search Ecoles :</label></td>
+            <td><select name="select" id="spell_Ecole"></select></td>
+            <td><input type="checkbox" id="spell_Ecole_box" value="Recherche Par Ecole"></td>
+            <td><label for="test1">Prendre en compte?</label></td>
+          </tr>
+          <tr>
+            <td><label for="test2">Search Branches :</label></td>
+            <td><select name="select" id="spell_Type"</select></td>
+            <td><input type="checkbox" id="spell_Type_box" value="Recherche Par Branche"></td>
+            <td><label for="test1">Prendre en compte?</label></td>
+          </tr>
+          <tr>
+            <td><label for="test1">Search Classes & Domaines :</label></td>
+            <td><select name="select" id="spell_Class"></select></td>
+            <td><input type="checkbox" id="spell_Classe_box" value="Recherche Par Ecole"></td>
+            <td><label for="test1">Prendre en compte?</label></td>
+          </tr>
+          <tr>
+            <td><label for="test1">Search by niveau :</label></td>
+            <td><select name="select" id="spell_lvl">
+              <option value='0' selected>Niveau 0</option>
+              <option value='1'>Niveau 1</option>
+              <option value='2'>Niveau 2</option>
+              <option value='3'>Niveau 3</option>
+              <option value='4'>Niveau 4</option>
+              <option value='5'>Niveau 5</option>
+              <option value='6'>Niveau 6</option>
+              <option value='7'>Niveau 7</option>
+              <option value='8'>Niveau 8</option>
+              <option value='9'>Niveau 9</option>
+            </select></td>
+            <td><input type="checkbox" id="spell_lvl_box" value="Recherche Par lvl"></td>
+            <td><label for="test1">Prendre en compte?</label></td>
+          </tr>
+          <tr>
+            <td><label for="test1">Livres Dispo :</label></td>
+            <td><select name="select" id="book_toAdd"></select></td>
+            <td><input type="button" class="btn btn-sm btn-primary" id="book_add" value="Add" onclick="addBook();"></td></td>
+          </tr>
+          <tr>
+            <td><label for="test1">Livres Ajoutés :</label></td>
+            <td><select name="select" id="book_Added"></select></td>
+            <td><input type="button" class="btn btn-sm btn-primary" id="book_del" value="Suppr" onclick="delBook();"></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="spell_cc_box" value="Recherche Par lvl"></td>
+            <td><label for="test1">Trier par Niveau de Classe/Domaine?</label></td>
+          </tr>
+          <tr>
+            <td><input type="button" id="spell_exe" class="btn btn-sm btn-primary" value="Recherche" onclick="search();"></td>
+          </tr>
+          <tr>
+            <td>Nombre de sorts trouvés : <label id="count"></label></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="page-header"><table class="table" id="SPELLS"></table></div>
+
+    </div>
+
+    <script language="javascript" type="text/javascript" src="./data.min.js"></script>
+    <script language="javascript" type="text/javascript" src="./functions.min.js"></script>
+  </body>
+</html>
