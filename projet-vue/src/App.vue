@@ -1,11 +1,18 @@
 <template>
     <h1>Les sorts :</h1>
-    <input type="text" id="spell_name_val" v-model="nom">
-    <ul>
-        <li v-for="spell in spellSearch" :key="spell[1]">
+    <input type="text" id="spell_name_val" v-model="nom" placeholder="Nom">
+    <table>
+        <tr>
+            <th>Arme</th>
+            <th>Nom</th>
+            <th>Sort</th>
+            <th>Ecole</th>
+            <th>Classe</th>
+        </tr>
+        <tr v-for="spell in spellSearch" :key="spell[1]">
             <SpellView :spell="spell"/>
-        </li>
-    </ul>
+        </tr>
+    </table>
 </template>
 
 <script>
@@ -27,12 +34,7 @@ export default {
    spellSearch(){
        return data.filter(spell => spell[1].startsWith(this.nom));
    }
-  },
-  methods: {
-        search : function() {
-            
-        }
-    }
+  }
 }
 </script>
 
@@ -44,5 +46,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+table {
+    margin-top: 25px;
 }
 </style>

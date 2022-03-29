@@ -1,5 +1,9 @@
 <template>
-    <p>{{ spell[1] }}</p>
+  <td>{{ spell[0] }}</td>
+  <td>{{ spell[1] }}</td>
+  <td>{{ spell[2] }}</td>
+  <td>{{ spell[3].join(", ") }}</td>
+  <td>{{ spell[4].map(e => e.join(': ')).join(', ') }}</td>
 </template>
 
 <script>
