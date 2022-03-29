@@ -1,76 +1,38 @@
 <template>
-  <h1>Les sorts :</h1>
-  <SearchName/>
-  <button @click="search">Recherche</button>
-  <p></p>
+    <h1>Les sorts :</h1>
+    <input type="text" id="spell_name_val" v-model="nom">
+    <ul>
+        <li v-for="spell in spellSearch" :key="spell[1]">
+            <SpellView :spell="spell"/>
+        </li>
+    </ul>
 </template>
 
 <script>
-import SearchName from './components/SearchName.vue'
+import SpellView from './components/SpellView.vue'
 import data from './assets/data.min.js'
 /* eslint-disable */
 
 export default {
   name: 'App',
   components: {
-    SearchName
+    SpellView
   },
-  mounted(){
-    console.log(data);
+  data: function() {
+      return {
+          nom: ""
+      }
+  },
+  computed: {
+   spellSearch(){
+       return data.filter(spell => spell[1].startsWith(this.nom));
+   }
   },
   methods: {
-    search : function() {
-        var e = false;
-        var b = false;
-        var a = "";
-        var c = [];
-        var f = 0;
-        for (var d = 0; d < data.length; d++) {
-            e = true;
-            e = tableContain([], data[d][0]);
-            if (e && document.getElementById("spell_Type_box").checked) {
-                e = e && tableContain(sortGetBranches(d), getValue("spell_Type"));
-            }
-            if (e && document.getElementById("spell_Ecole_box").checked) {
-                e = e && sortGetEcole(d) == getValue("spell_Ecole");
-            }
-            if (e && document.getElementById("spell_Classe_box").checked) {
-                e = e && tableContain(sortGetClass(d), getValue("spell_Class"));
-            }
-            if (e && document.getElementById("spell_name_box").checked) {
-                e = e && data[d][1].match(getValue("spell_name_val")) != null;
-            }
-            if (e && document.getElementById("spell_lvl_box").checked) {
-                e = e && tableContain(sortGetLvl(d), parseInt(getValue("spell_lvl")));
-            }
-            if (e) {
-                f++;
-                if (document.getElementById("spell_Ecole_box").checked) {
-                    c.push(new Array(sortGetClassLvl(d, getValue("spell_Class")), d));
-                } else {
-                    c.push(new Array(sortGetLvl(d)[0], d));
-                }
-            }
-        }
-        if (document.getElementById("spell_cc_box").checked) {
-            c.sort();
-        }
-        for (var d = 0; d < c.length; d++) {
-            a += "<div class='panel panel-default'><div class='panel-heading'><h3 class='panel-title' onclick='toggleSort(" + c[d][1] + ");'>" + data[c[d][1]][1] + "</h3></div><div class='panel-body' id='res" + c[d][1] + "'></div></div>";
-        }
-        document.getElementById("SPELLS").innerHTML = a;
-        document.getElementById("count").innerHTML = f;
-    }
-  }
-}
-function tableContain(c, b) {
-    var a = false;
-    for (var d = 0; d < c.length; d++) {
-        if (c[d] == b) {
-            a = true;
+        search : function() {
+            
         }
     }
-    return a;
 }
 </script>
 
