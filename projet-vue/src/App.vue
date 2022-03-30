@@ -3,17 +3,17 @@
     <input type="text" id="spell_name_val" v-model="nom" placeholder="Nom">
     <table>
         <tr>
-            <th>Nombre d'armes</th>
+            <th>Nombre de livres</th>
             <th>Nombre de sorts</th>
         </tr>
         <tr>
-            <td>{{ statArme }}</td>
+            <td>{{ statLivre }}</td>
             <td>{{ statSort }}</td>
         </tr>
     </table>
     <table>
         <tr>
-            <th>Arme</th>
+            <th>Livre</th>
             <th>Nom</th>
             <th>Sort</th>
             <th>Ecole</th>
@@ -44,7 +44,7 @@ export default {
    spellSearch(){
        return data.filter(spell => spell[1].startsWith(this.nom));
    },
-   statArme(){
+   statLivre(){
        let value = data.filter(spell => spell[1].startsWith(this.nom));
        let count = 0;
        let countArray = [];
