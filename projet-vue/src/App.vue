@@ -3,6 +3,16 @@
     <input type="text" id="spell_name_val" v-model="nom" placeholder="Nom">
     <table>
         <tr>
+            <th>Nombre d'armes</th>
+            <th>Nombre de sorts</th>
+        </tr>
+        <tr>
+            <td>{{ statArme }}</td>
+            <td>{{ statSort }}</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
             <th>Arme</th>
             <th>Nom</th>
             <th>Sort</th>
@@ -33,6 +43,30 @@ export default {
   computed: {
    spellSearch(){
        return data.filter(spell => spell[1].startsWith(this.nom));
+   },
+   statArme(){
+       let value = data.filter(spell => spell[1].startsWith(this.nom));
+       let count = 0;
+       let countArray = [];
+       for (const v of value){
+           if (!countArray.includes(v[0])){
+               count++;
+               countArray.push(v[0]);
+           }
+       } 
+       return count;
+   },
+   statSort(){
+       let value = data.filter(spell => spell[1].startsWith(this.nom));
+       let count = 0;
+       let countArray = [];
+       for (const v of value){
+           if (!countArray.includes(v[2])){
+               count++;
+               countArray.push(v[0]);
+           }
+       } 
+       return count;
    }
   }
 }
@@ -49,5 +83,7 @@ export default {
 }
 table {
     margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
 }
 </style>
