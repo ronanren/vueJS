@@ -1,6 +1,7 @@
 <template>
     <h1>Les sorts :</h1>
     <input type="text" id="spell_name_val" v-model="nom" placeholder="Nom">
+    <input type="checkbox" id="checkbox" v-model="checkedNom">
     <table>
         <tr>
             <th>Nombre de livres</th>
@@ -37,12 +38,16 @@ export default {
   },
   data: function() {
       return {
-          nom: ""
+          nom: "",
+          checkedNom: false
       }
   },
   computed: {
    spellSearch(){
-       return data.filter(spell => spell[1].startsWith(this.nom));
+        if (this.checkedNom)
+            return data.filter(spell => spell[1].startsWith(this.nom));
+        else
+            return [];
    },
    statLivre(){
        let value = data.filter(spell => spell[1].startsWith(this.nom));
@@ -54,7 +59,10 @@ export default {
                countArray.push(v[0]);
            }
        } 
-       return count;
+        if (this.checkedNom)
+            return count;
+        else
+            return "non défini"
    },
    statSort(){
        let value = data.filter(spell => spell[1].startsWith(this.nom));
@@ -66,7 +74,10 @@ export default {
                countArray.push(v[0]);
            }
        } 
-       return count;
+       if (this.checkedNom)
+            return count;
+        else
+            return "non défini"
    }
   }
 }
