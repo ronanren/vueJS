@@ -12,7 +12,7 @@
             <td>{{ statSort }}</td>
         </tr>
     </table>
-    <table>
+    <table class="table">
         <tr>
             <th>Livre</th>
             <th>Nom</th>
@@ -96,5 +96,56 @@ table {
     margin-top: 25px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.table {
+    background: white;
+    border-radius: 3px;
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 25px;
+    max-width: 1200px;
+    padding: 5px;
+    width: 100%;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+th {
+    padding: 5px;
+}
+.table th {
+  color: #D5DDE5;;
+  background: #1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size: 20px;
+  font-weight: 100;
+  padding: 10px;
+  text-align: left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align: middle;
+}
+
+.table th:first-child {
+  border-top-left-radius: 3px;
+}
+ 
+.table th:last-child {
+  border-top-right-radius: 3px;
+  border-right: none;
+}
+  
+.table tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:16px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+ 
+.table tr:hover td {
+  background:#4E5066;
+  color:#FFFFFF;
+  border-top: 1px solid #22262e;
 }
 </style>
