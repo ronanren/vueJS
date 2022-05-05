@@ -44,84 +44,101 @@ import data from './assets/data.min.js'
 /* eslint-disable */
 
 export default {
-  name: 'App',
-  components: {
-    SpellView
-  },
-  data: function() {
-      return {
-          nom: "",
-          livre: "",
-          checkedNom: false,
-          checkedLivre: false
-      }
-  },
-  computed: {
-    // Fonction de recherche avec le tri de configuration active à chaque entrée de caractères
-   spellSearch(){
-        if (this.checkedNom && this.checkedLivre)
-            // Utilisation de la fonction filter pour filtrer les données avec les données commencant par la recherche de l'utilisateur
-            return data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()) && spell[0].toLowerCase().startsWith(this.livre.toLowerCase()));
-        else if (this.checkedNom)
-            return data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()));
-        else if (this.checkedLivre){
-            return data.filter(spell => spell[0].toLowerCase().startsWith(this.livre.toLowerCase()));
+    name: 'App',
+    components: {
+        SpellView
+    },
+    data: function() {
+        return {
+            nom: "",
+            livre: "",
+            checkedNom: false,
+            checkedLivre: false
         }
-        else
-            return [];
-   },
-   // Fonction permettant de calculer la statistique des livres
-   statLivre(){
-       // Utilisation de la fonction filter pour filtrer les données avec les données commencant par la recherche de l'utilisateur
-        let value = data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()));
-        if (this.checkedNom && this.checkedLivre)
-            value = data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()) && spell[0].toLowerCase().startsWith(this.livre.toLowerCase()));
-        else if (this.checkedNom)
-            value = data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()));
-        else if (this.checkedLivre)
-            value = data.filter(spell => spell[0].toLowerCase().startsWith(this.livre.toLowerCase()));
-
-        let count = 0;
-        let countArray = [];
-        for (const v of value){
-            // ajout des livres dans un tableau et verification des doublons pour compter le nombre de livres différents
-            if (!countArray.includes(v[0])){
-                count++;
-                countArray.push(v[0]);
+    },
+    // Gestion de sauvegarde de la configuration (case à cocher)
+    mounted() {
+        if (localStorage.checkedNom) {
+            this.checkedNom = localStorage.checkedNom;
+        }
+        if (localStorage.checkedLivre){
+            this.checkedLivre = localStorage.checkedLivre;
+        }
+    },
+    watch: {
+        checkedNom(newName) {
+            localStorage.checkedNom = newName;
+        },
+        checkedLivre(newLivre) {
+            localStorage.checkedLivre = newLivre;
+        }
+    },
+    computed: {
+        // Fonction de recherche avec le tri de configuration active à chaque entrée de caractères
+        spellSearch(){
+            if (this.checkedNom && this.checkedLivre)
+                // Utilisation de la fonction filter pour filtrer les données avec les données commencant par la recherche de l'utilisateur
+                return data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()) && spell[0].toLowerCase().startsWith(this.livre.toLowerCase()));
+            else if (this.checkedNom)
+                return data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()));
+            else if (this.checkedLivre){
+                return data.filter(spell => spell[0].toLowerCase().startsWith(this.livre.toLowerCase()));
             }
-        } 
-        // si au moins une recherche est activé, afficher les statistiques
-        if (this.checkedNom || this.checkedLivre)
-            return count;
-        else
-            return "non défini"
-   },
-   // Fonction permettant de calculer la statistique des sorts
-   statSort(){
-       // Utilisation de la fonction filter pour filtrer les données avec les données commencant par la recherche de l'utilisateur
-        let value = data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()));
-        if (this.checkedNom && this.checkedLivre)
-            value = data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()) && spell[0].toLowerCase().startsWith(this.livre.toLowerCase()));
-        else if (this.checkedNom)
-            value = data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()));
-        else if (this.checkedLivre)
-            value = data.filter(spell => spell[0].toLowerCase().startsWith(this.livre.toLowerCase()));
-       
-       let count = 0;
-       let countArray = [];
-       for (const v of value){
-           // ajout des sorts dans un tableau et verification des doublons pour compter le nombre de sorts différents
-           if (!countArray.includes(v[2])){
-               count++;
-               countArray.push(v[0]);
-           }
-       } 
-       // si au moins une recherche est activé, afficher les statistiques
-       if (this.checkedNom || this.checkedLivre)
-            return count;
-        else
-            return "non défini"
-   }
+            else
+                return [];
+        },
+        // Fonction permettant de calculer la statistique des livres
+        statLivre(){
+            // Utilisation de la fonction filter pour filtrer les données avec les données commencant par la recherche de l'utilisateur
+            let value = data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()));
+            if (this.checkedNom && this.checkedLivre)
+                value = data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()) && spell[0].toLowerCase().startsWith(this.livre.toLowerCase()));
+            else if (this.checkedNom)
+                value = data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()));
+            else if (this.checkedLivre)
+                value = data.filter(spell => spell[0].toLowerCase().startsWith(this.livre.toLowerCase()));
+
+            let count = 0;
+            let countArray = [];
+            for (const v of value){
+                // ajout des livres dans un tableau et verification des doublons pour compter le nombre de livres différents
+                if (!countArray.includes(v[0])){
+                    count++;
+                    countArray.push(v[0]);
+                }
+            } 
+            // si au moins une recherche est activé, afficher les statistiques
+            if (this.checkedNom || this.checkedLivre)
+                return count;
+            else
+                return "non défini"
+        },
+        // Fonction permettant de calculer la statistique des sorts
+        statSort(){
+            // Utilisation de la fonction filter pour filtrer les données avec les données commencant par la recherche de l'utilisateur
+            let value = data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()));
+            if (this.checkedNom && this.checkedLivre)
+                value = data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()) && spell[0].toLowerCase().startsWith(this.livre.toLowerCase()));
+            else if (this.checkedNom)
+                value = data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()));
+            else if (this.checkedLivre)
+                value = data.filter(spell => spell[0].toLowerCase().startsWith(this.livre.toLowerCase()));
+        
+            let count = 0;
+            let countArray = [];
+            for (const v of value){
+                // ajout des sorts dans un tableau et verification des doublons pour compter le nombre de sorts différents
+                if (!countArray.includes(v[2])){
+                    count++;
+                    countArray.push(v[0]);
+                }
+            } 
+            // si au moins une recherche est activé, afficher les statistiques
+            if (this.checkedNom || this.checkedLivre)
+                    return count;
+                else
+                    return "non défini"
+    }
   }
 }
 </script>
