@@ -1,7 +1,8 @@
 <template>
     <h1>Les sorts :</h1>
-    <input type="text" id="spell_name_val" v-model="nom" placeholder="Nom">
+    <input type="text" id="spell_name_val" v-model="nom" placeholder="Nom">   
     <input type="checkbox" id="checkbox" v-model="checkedNom">
+    <label for="checkbox">recherche active</label>
     <table>
         <tr>
             <th>Nombre de livres</th>
@@ -45,12 +46,12 @@ export default {
   computed: {
    spellSearch(){
         if (this.checkedNom)
-            return data.filter(spell => spell[1].startsWith(this.nom));
+            return data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()));
         else
             return [];
    },
    statLivre(){
-       let value = data.filter(spell => spell[1].startsWith(this.nom));
+       let value = data.filter(spell => spell[1].toLowerCase().startsWith(this.nom.toLowerCase()));
        let count = 0;
        let countArray = [];
        for (const v of value){
